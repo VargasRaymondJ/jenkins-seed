@@ -1,5 +1,5 @@
 mavenJob('DNF-API') { // Name of the Jenkins job
-    jdk('Java 8')
+    jdk('1.8')
     scm {
         github('git://github.com/VargasRaymondJ/DNF2018-API')
     }
