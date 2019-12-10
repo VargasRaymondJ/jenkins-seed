@@ -1,7 +1,7 @@
 mavenJob('DNF-API') { // Name of the Jenkins job
     jdk('java 8')
     scm {
-        github('git://github.com/VargasRaymondJ/DNF2018-API')
+        github('VargasRaymondJ/DNF2018-API')
     }
     triggers {
         githubPush()
