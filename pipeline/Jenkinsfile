@@ -1,0 +1,25 @@
+// Example Jenkinsfile for a nodeJS application
+//TODO: Make one for a maven project
+
+node { // Doesn't matter what jenkins node we run this job on
+
+    def commit_id //defining var
+
+    //pipeline is made up of stages. Can define as many as needed
+    stage('Preparation') {
+        checkout scm
+        sh "git rev-parse --short HEAD > .git/commit-id" // checking out this repo and grabbing the SHA
+        commit_id = readFile('.git/commit-id').trim()
+    } 
+
+    stage('test'){ 
+        nodejs (nodeJsInstallationName: 'nodejs') // The node installation name we set up in jenkins
+        sh "npm install --only-dev" // Testing dependencies are dev dependencies for the node project
+        sh "npm test"
+    }
+
+    stage('docker build/push') {
+        docker.withRegistry('https://ondex.docker.io/vi/', 'dockerhub') // Push to this repo, with these creds (defined in jenkins)
+        def app = docker.build("vargasraymondj/therepo:${commit_id}, '.'").push()
+    }
+}
