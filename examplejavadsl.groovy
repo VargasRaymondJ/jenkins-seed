@@ -13,14 +13,6 @@ mavenJob('DNF-API') { // Name of the Jenkins job
     goals('install')
 }
 
-// mavenJob('example') {
-//     logRotator(-1, 10)
-//     jdk('Java 8')
-//     scm {
-//         github('jenkinsci/jenkins', 'master')
-//     }
-//     triggers {
-//         githubPush()
-//     }
-//     goals('clean verify')
-// }
+// TODO: Create another job successfully with the Freeform job type 
+
+
